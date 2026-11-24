@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用 PyTorch 隐藏层特征和余弦相似度检索手写数字图片。">
+  <title>手写数字相似图片检索 · 程锦康</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .retrieval-page {max-width: 850px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; line-height: 1.75;}
+    .retrieval-page h1 {font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.2; margin: 1.2rem 0;}
+    .retrieval-page h2 {font-size: 1.5rem; margin: 2rem 0 .6rem;}
+    .retrieval-page pre {overflow: auto; border: 1px solid var(--line, #d6e0eb); border-radius: .65rem; padding: 1rem; background: #eef4fb;}
+    .retrieval-page li {margin: .25rem 0;}
+    .result-list {padding: .7rem 1.5rem .7rem 2.5rem; border: 1px solid var(--line, #d6e0eb); border-radius: .65rem;}
+  </style>
+</head>
+<body>
+  <main class="retrieval-page">
+    <a class="text-link" href="../../index.html#projects">返回项目列表</a>
+    <h1>手写数字相似图片检索</h1>
+    <p>输入一张手写数字图片，从测试集剩余的 269 张图中找出最相似的五张。这个 CPU 实验沿用分类实验训练的 PyTorch 模型。</p>
+    <h2>从分类到检索</h2>
+    <p>原来的分类实验输出 0 到 9 的类别分数。检索时，跳过分类层，取 ReLU 后的 64 维特征，计算查询图与每张候选图的余弦相似度并排序。程序排除查询图本身，数字标签用于核对结果。</p>
+    <h2>一次实际运行的结果</h2>
+    <p>用测试集第 0 张图查询，标签为 <strong>6</strong>。前五张的标签都为 6。</p>
+    <ol class="result-list">
+      <li>第 6 张，相似度 0.9843</li>
+      <li>第 191 张，相似度 0.9744</li>
+      <li>第 52 张，相似度 0.9698</li>
+      <li>第 180 张，相似度 0.9694</li>
+      <li>第 62 张，相似度 0.9686</li>
+    </ol>
+    <p>这组排序来自固定测试划分的一张查询图。后续可以在同一候选库上比较像素和隐藏层特征，并用全部查询的 Top-1 同类命中率评价结果。</p>
+    <h2>在本地复现</h2>
+    <p>下载或克隆仓库，切换到 <code>projects/digit-retrieval</code>。用装有项目依赖的 Python 运行以下命令。首次运行会自动训练默认模型。</p>
+    <pre><code>python retrieve.py
+python retrieve.py --query-index 12</code></pre>
+    <p><a class="button outline" href="https://github.com/gun0707/cjk-profile/tree/main/projects/digit-retrieval">查看源码与依赖安装说明</a></p>
+  </main>
+</body>
+</html>

@@ -5,6 +5,7 @@
 ## 项目作品
 
 - [PyTorch 手写数字识别](https://github.com/gun0707/pytorch-digits)：可复现实验，最佳配置测试准确率 97.0%。
+  - [相似图片检索](projects/digit-retrieval/) 使用隐藏层特征和余弦相似度检索 Top-5 图片。
 - [Qt 图算法可视化](https://github.com/gun0707/qt-graph-visualizer)：DFS、Prim、Dijkstra 的逐步演示。
 
 ## 本地预览
